@@ -35,7 +35,7 @@ jobs:
       run: pdflatex latex.tex
 
     - name: Upload PDF as artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: dokument-pdf
         path: dokument.pdf
