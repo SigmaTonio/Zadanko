@@ -7,35 +7,35 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Ensure this uses a Linux runner
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up GCC
-      run: sudo apt-get install build-essential
+      - name: Set up GCC
+        run: sudo apt-get install build-essential
 
-    - name: Compile C program
-      run: gcc src/mandelbrot.c -o mandelbrot
+      - name: Compile C program
+        run: gcc src/mandelbrot.c -o mandelbrot -lm  # Link the math library
 
-    - name: Run C program to generate data
-      run: ./mandelbrot
+      - name: Run C program to generate data
+        run: ./mandelbrot
 
-    - name: Install Gnuplot
-      run: sudo apt-get install gnuplot
+      - name: Install Gnuplot
+        run: sudo apt-get install gnuplot
 
-    - name: Generate plot with Gnuplot
-      run: gnuplot mandelbrot.gp
+      - name: Generate plot with Gnuplot
+        run: gnuplot mandelbrot.gp
 
-    - name: Install LaTeX
-      run: sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-latex-extra
+      - name: Install LaTeX
+        run: sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-latex-extra
 
-    - name: Compile LaTeX document
-      run: pdflatex latex.tex
+      - name: Compile LaTeX document
+        run: pdflatex latex.tex
 
-    - name: Upload PDF as artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: dokument-pdf
-        path: dokument.pdf
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dokument-pdf
+          path: dokument.pdf
