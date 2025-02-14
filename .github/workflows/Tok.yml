@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up GCC
       run: sudo apt-get install build-essential
@@ -35,7 +35,7 @@ jobs:
       run: pdflatex latex.tex
 
     - name: Upload PDF as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dokument-pdf
         path: dokument.pdf
