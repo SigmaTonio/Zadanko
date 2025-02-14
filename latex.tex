@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}  
+\usepackage{listings}  
+\usepackage{hyperref}  
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    basicstyle=\ttfamily\small,     
+    frame=single,                  
+    backgroundcolor=\color{gray!10}, 
+    keywordstyle=\color{blue},       
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red},        
+    numbers=left,                   
+    numberstyle=\tiny\color{gray}, 
+    breaklines=true,  
+    captionpos=b   
+}
+
+\title{Zbiór Mandelbrota - Projekt w c i gnuplot}
+\author{Antoni Rucki}
+\date{\today}
+
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage{}
+\section{Kod w C}
+Poniżej znajduje się kod generujący zbiór Mandelbrota.
+
+
+
+\begin{lstlisting}[language=C, caption=Kod programu Mandelbrota]
+#include <stdio.h>
+#include <complex.h>
+
+#define WIDTH 800
+#define HEIGHT 800
+#define MAX_ITER 1000
+
+int mandelbrot(double complex c) {
+    double complex z = 0;
+    int iter = 0;
+    while (cabs(z) <= 2.0 && iter < MAX_ITER) {
+        z = z * z + c;
+        iter++;
+    }
+    return iter;
+}
+
+int main() {
+    FILE *fp = fopen("mandelbrot.dat", "w");
+    if (!fp) {
+        printf("Błąd otwierania pliku!\n");
+        return 1;
+    }
+
+    for (int y = 0; y < HEIGHT; y++) {
+        for (int x = 0; x < WIDTH; x++) {
+            double real = (x - WIDTH / 2.0) * 4.0 / WIDTH;
+            double imag = (y - HEIGHT / 2.0) * 4.0 / HEIGHT;
+            double complex c = real + imag * I;
+            int value = mandelbrot(c);
+            fprintf(fp, "%d %d %d\n", x, y, value);
+        }
+    }
+    
+    fclose(fp);
+    return 0;
+}
+
+\end{lstlisting}
+\newpage{}
+\section{Kod gnuplota}
+Poniżej znajduje się kod do gnuplota o nazwie mandelbrot.gp.
+\begin{lstlisting}[language=C, caption=Kod gnuplota]
+set terminal pdfcairo size 800,800
+set output 'mandelbrot.pdf'
+set view map
+unset key
+set size ratio -1
+set palette defined (0 "black", 1 "blue", 2 "cyan", 3 "green", 4 "yellow", 5 "red", 6 "white")
+plot 'mandelbrot.dat' using 1:2:3 with points palette
+
+
+\end{lstlisting}
+\newpage{}
+\section{Wizualizacja zbioru Mandelbrota}
+Na poniższym rysunku przedstawiono zbiór mandelbrota wygenerowany na podstawie kodu w C i gnuplota.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{mandelbrot.pdf}
+    \caption{Zbiór Mandelbrota}
+    \label{fig:mandelbrot}
+\end{figure}
+
+\end{document}
