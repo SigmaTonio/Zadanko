@@ -1,39 +1,34 @@
 \documentclass{article}
 \usepackage[T1]{fontenc}
-\usepackage{graphicx}  
-\usepackage{listings}  
-\usepackage{hyperref}  
+\usepackage{graphicx}
 \usepackage{listings}
+\usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage[utf8]{inputenc}
 
 \lstset{
-    basicstyle=\ttfamily\small,     
-    frame=single,                  
-    backgroundcolor=\color{gray!10}, 
-    keywordstyle=\color{blue},       
+    basicstyle=\ttfamily\small,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    keywordstyle=\color{blue},
     commentstyle=\color{green!50!black},
-    stringstyle=\color{red},        
-    numbers=left,                   
-    numberstyle=\tiny\color{gray}, 
-    breaklines=true,  
-    captionpos=b   
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    captionpos=b
 }
 
-\title{Zbiór Mandelbrota - Projekt w c i gnuplot}
+\title{Zbiór Mandelbrota - Projekt w C i Gnuplot}
 \author{Antoni Rucki}
 \date{\today}
-
-
 
 \begin{document}
 \maketitle
 \tableofcontents
-\newpage{}
+\newpage
 \section{Kod w C}
 Poniżej znajduje się kod generujący zbiór Mandelbrota.
-
-
 
 \begin{lstlisting}[language=C, caption=Kod programu Mandelbrota]
 #include <stdio.h>
@@ -69,16 +64,16 @@ int main() {
             fprintf(fp, "%d %d %d\n", x, y, value);
         }
     }
-    
+
     fclose(fp);
     return 0;
 }
-
 \end{lstlisting}
-\newpage{}
-\section{Kod gnuplota}
+
+\newpage
+\section{Kod Gnuplota}
 Poniżej znajduje się kod do gnuplota o nazwie mandelbrot.gp.
-\begin{lstlisting}[language=C, caption=Kod gnuplota]
+\begin{lstlisting}[language=Gnuplot, caption=Kod Gnuplota]
 set terminal pdfcairo size 800,800
 set output 'mandelbrot.pdf'
 set view map
@@ -86,12 +81,11 @@ unset key
 set size ratio -1
 set palette defined (0 "black", 1 "blue", 2 "cyan", 3 "green", 4 "yellow", 5 "red", 6 "white")
 plot 'mandelbrot.dat' using 1:2:3 with points palette
-
-
 \end{lstlisting}
-\newpage{}
+
+\newpage
 \section{Wizualizacja zbioru Mandelbrota}
-Na poniższym rysunku przedstawiono zbiór mandelbrota wygenerowany na podstawie kodu w C i gnuplota.
+Na poniższym rysunku przedstawiono zbiór Mandelbrota wygenerowany na podstawie kodu w C i Gnuplota.
 
 \begin{figure}[h]
     \centering
