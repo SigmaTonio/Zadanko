@@ -19,7 +19,7 @@
     captionpos=b
 }
 
-\title{Zbiór Mandelbrota - Projekt w C i Gnuplot}
+\title{Zbior Mandelbrota - Projekt w C i Gnuplot}
 \author{Antoni Rucki}
 \date{\today}
 
@@ -28,7 +28,7 @@
 \tableofcontents
 \newpage
 \section{Kod w C}
-Poniżej znajduje się kod generujący zbiór Mandelbrota.
+Ponizej znajduje sie kod generujacy zbior Mandelbrota.
 
 \begin{lstlisting}[language=C, caption=Kod programu Mandelbrota]
 #include <stdio.h>
@@ -51,7 +51,7 @@ int mandelbrot(double complex c) {
 int main() {
     FILE *fp = fopen("mandelbrot.dat", "w");
     if (!fp) {
-        printf("Błąd otwierania pliku!\n");
+        printf("Blad otwierania pliku!\n");
         return 1;
     }
 
@@ -72,7 +72,7 @@ int main() {
 
 \newpage
 \section{Kod Gnuplota}
-Poniżej znajduje się kod do gnuplota o nazwie mandelbrot.gp.
+Ponizej znajduje sie kod do gnuplota o nazwie mandelbrot.gp.
 \begin{lstlisting}[language=Gnuplot, caption=Kod Gnuplota]
 set terminal pdfcairo size 800,800
 set output 'mandelbrot.pdf'
@@ -85,12 +85,12 @@ plot 'mandelbrot.dat' using 1:2:3 with points palette
 
 \newpage
 \section{Wizualizacja zbioru Mandelbrota}
-Na poniższym rysunku przedstawiono zbiór Mandelbrota wygenerowany na podstawie kodu w C i Gnuplota.
+Na ponizszym rysunku przedstawiono zbior Mandelbrota wygenerowany na podstawie kodu w C i Gnuplota.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{mandelbrot.pdf}
-    \caption{Zbiór Mandelbrota}
+    \caption{Zbior Mandelbrota}
     \label{fig:mandelbrot}
 \end{figure}
 
