@@ -1,15 +1,15 @@
 #include <stdio.h>
-#include <complex.h>
 
 #define WIDTH 800
 #define HEIGHT 800
 #define MAX_ITER 1000
 
-int mandelbrot(double complex c) {
-    double complex z = 0;
+int mandelbrot(double real, double imag) {
+    double zr = 0, zi = 0, zr2, zi2;
     int iter = 0;
-    while (cabs(z) <= 2.0 && iter < MAX_ITER) {
-        z = z * z + c;
+    while ((zr2 = zr * zr) + (zi2 = zi * zi) <= 4.0 && iter < MAX_ITER) {
+        zi = 2.0 * zr * zi + imag;
+        zr = zr2 - zi2 + real;
         iter++;
     }
     return iter;
@@ -17,21 +17,16 @@ int mandelbrot(double complex c) {
 
 int main() {
     FILE *fp = fopen("mandelbrot.dat", "w");
-    if (!fp) {
-        printf("Błąd otwierania pliku!\n");
-        return 1;
-    }
+    if (!fp) return 1;
 
     for (int y = 0; y < HEIGHT; y++) {
+        double imag = (y - HEIGHT / 2.0) * 4.0 / HEIGHT;
         for (int x = 0; x < WIDTH; x++) {
             double real = (x - WIDTH / 2.0) * 4.0 / WIDTH;
-            double imag = (y - HEIGHT / 2.0) * 4.0 / HEIGHT;
-            double complex c = real + imag * I;
-            int value = mandelbrot(c);
-            fprintf(fp, "%d %d %d\n", x, y, value);
+            fprintf(fp, "%d %d %d\n", x, y, mandelbrot(real, imag));
         }
     }
-    
+
     fclose(fp);
     return 0;
 }
