@@ -29,7 +29,7 @@ jobs:
         run: gnuplot mandelbrot.gp
 
       - name: Install LaTeX
-        run: sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-latex-extra
+        run: sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-latex-extra texlive-lang-polish
 
       - name: Compile LaTeX document
         run: pdflatex latex.tex
@@ -38,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dokument-pdf
-          path: dokument.pdf
+          path: latex.pdf
